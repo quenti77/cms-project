@@ -7,4 +7,5 @@ use Neecride\Cms\Controllers\HomeController;
  * @var Alterouter $router
  */
 
-$router->get('/', implode('@', [HomeController::class, 'index']));
+$router->get('/', tr([HomeController::class, 'index']), 'home.index');
+$router->post('/comment', tr([HomeController::class, 'comment']), 'home.comment');

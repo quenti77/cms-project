@@ -12,7 +12,11 @@ class TwigFactory
     public function __invoke(ContainerInterface $container): TwigRenderer|null
     {
         try {
-            return new TwigRenderer($container->get('views.path'), $container->get(Alterouter::class));
+            return new TwigRenderer(
+                $container->get('views.path'),
+                $container->get(Alterouter::class),
+                trim($container->get('app.url'), '/')
+            );
         } catch (NotFoundExceptionInterface|ContainerExceptionInterface) {
         }
 

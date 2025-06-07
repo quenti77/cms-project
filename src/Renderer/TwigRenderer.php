@@ -7,6 +7,7 @@ use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\Loader\LoaderInterface;
 
@@ -15,12 +16,14 @@ class TwigRenderer implements RendererInterface
     private LoaderInterface $loader;
     private Environment $twig;
 
-    public function __construct(string $path, Alterouter $router)
+    public function __construct(string $path, Alterouter $router, string $baseUrl)
     {
         $this->loader = new FilesystemLoader($path);
         $this->twig = new Environment($this->loader, [
             'debug' => true,
         ]);
+        $this->twig->addExtension(new DebugExtension());
+        $this->twig->addExtension(new TwigExtension($router, $baseUrl));
     }
 
     /**

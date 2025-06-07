@@ -14,4 +14,9 @@ class HomeController
     {
         echo $this->renderer->render('home.twig', ['name' => 'John']);
     }
+
+    public function comment(): void
+    {
+        header('Location: /');
+    }
 }
