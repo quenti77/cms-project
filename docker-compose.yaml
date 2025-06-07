@@ -1,0 +1,16 @@
+volumes:
+  db: {}
+  db_test: {}
+
+services:
+  db:
+    image: postgres:17.5
+    restart: always
+    environment:
+      POSTGRES_USER: cms_project
+      POSTGRES_DB: cms_project
+      POSTGRES_PASSWORD: cms_project
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
